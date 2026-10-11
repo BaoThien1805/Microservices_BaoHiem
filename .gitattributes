@@ -1,2 +1,16 @@
-# Auto detect text files and perform LF normalization
+# Tu dong nhan dien file text
 * text=auto
+
+# Linux scripts - giu LF
+*.sh text eol=lf
+
+# Docker
+Dockerfile text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Source code
+*.cs text
+*.razor text
+*.json text
+*.sql text

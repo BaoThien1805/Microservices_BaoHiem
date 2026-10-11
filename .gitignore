@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# .NET
+**/bin/
+**/obj/
+
+# Node.js
+**/node_modules/
+**/dist/
+
+# Gradle
+**/.gradle/
+**/build/
+
+# Environment
+**/.env.local
+**/.env

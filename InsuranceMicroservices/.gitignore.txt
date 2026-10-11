@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# .NET
+**/bin/
+**/obj/
+**/TestResults/
+
+# Vue / Node.js
+**/node_modules/
+**/dist/
+
+# Gradle
+**/.gradle/
+eureka-server/build/
+**/eureka-server/build/
+
+# Environment
+**/.env.local
+**/.env
