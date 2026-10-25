@@ -1,9 +1,8 @@
-version: '3'
-
 services:
   eureka:
     build: ../eureka-server
     image: eureka-server
+    pull_policy: build
     container_name: eureka-server
     ports:
       - 8761:8761

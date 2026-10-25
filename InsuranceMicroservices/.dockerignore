@@ -1,0 +1,9 @@
+**/bin
+**/obj
+**/node_modules
+**/.gradle
+**/build
+.vs
+.git
+**/.env
+**/.env.local

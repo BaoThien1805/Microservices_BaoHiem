@@ -1,0 +1,15 @@
+{
+  "solution": {
+    "path": "InsuranceMicroservices.sln",
+    "projects": [
+      "AgentPortalApiGateway\\AgentPortalApiGateway.csproj",
+      "AuthService\\AuthService.csproj",
+      "AuthService.Test\\AuthService.Test.csproj",
+      "ChatService\\ChatService.csproj",
+      "ChatService.Test\\ChatService.Test.csproj",
+      "DashboardService\\DashboardService.csproj",
+      "DashboardService.Test\\DashboardService.Test.csproj",
+      "BlazorWasmClient\\BlazorWasmClient.csproj"
+    ]
+  }
+}

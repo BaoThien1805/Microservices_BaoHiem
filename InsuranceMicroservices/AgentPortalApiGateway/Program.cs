@@ -22,8 +22,6 @@ public class Program
 
     public static IWebHost BuildWebHost(string[] args)
     {
-        var key = Encoding.ASCII.GetBytes("THIS_IS_A_RANDOM_SECRET_2e7a1e80-16ee-4e52-b5c6-5e8892453459");
-
         return WebHost.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
@@ -36,13 +34,18 @@ public class Program
                     .AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
                     .AddEnvironmentVariables();
             })
-            .ConfigureServices(s =>
+            .UseUrls(System.Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "http://localhost:8099")
+            .ConfigureServices((context, s) =>
             {
+                var secret = context.Configuration["AppSettings:Secret"] ?? "";
+                if (Encoding.UTF8.GetByteCount(secret) < 32)
+                    throw new System.InvalidOperationException("Set AppSettings__Secret to a shared random key of at least 32 bytes.");
+                var key = Encoding.UTF8.GetBytes(secret);
                 s.AddCors();
                 s.AddAuthentication(x =>
                     {
-                        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                        x.DefaultAuthenticateScheme = "ApiSecurity";
+                        x.DefaultChallengeScheme = "ApiSecurity";
                     })
                     .AddJwtBearer("ApiSecurity", x =>
                     {

@@ -29,11 +29,13 @@ public class IntegrationTestsFixture : IAsyncLifetime
             {
                 configBuilder.AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    ["ConnectionStrings:DefaultConnection"] = pgSqlContainer.GetConnectionString()
+                    ["ConnectionStrings:DefaultConnection"] = pgSqlContainer.GetConnectionString(),
+                    ["Eureka:Client:ShouldRegisterWithEureka"] = "false",
+                    ["Eureka:Client:ShouldFetchRegistry"] = "false"
                 });
             });
 
-        SystemUnderTest = new AlbaHost(hostBuilder);
+        SystemUnderTest = await hostBuilder.StartAlbaAsync();
     }
 
     public async Task DisposeAsync()

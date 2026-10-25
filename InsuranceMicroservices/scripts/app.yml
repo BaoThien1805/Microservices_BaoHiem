@@ -7,6 +7,8 @@ services:
       dockerfile: AgentPortalApiGateway/Dockerfile
     image: dotnet-agent-portal-gateway
     container_name: dotnet-agent-portal-gateway
+    environment:
+      AppSettings__Secret: ${AppSettings__Secret:?Set the shared JWT signing secret}
     ports:
     - 8099:8099
 
@@ -16,6 +18,8 @@ services:
       dockerfile: AuthService/Dockerfile
     image: dotnet-auth-service
     container_name: dotnet-auth-service
+    environment:
+      AppSettings__Secret: ${AppSettings__Secret:?Set the shared JWT signing secret}
     ports:
     - 6060:6060
   
@@ -25,6 +29,8 @@ services:
       dockerfile: ChatService/Dockerfile
     image: dotnet-chat-service
     container_name: dotnet-chat-service
+    environment:
+      AppSettings__Secret: ${AppSettings__Secret:?Set the shared JWT signing secret}
     ports:
     - 4099:4099
 

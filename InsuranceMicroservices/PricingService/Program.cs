@@ -1,41 +1,10 @@
-﻿
-using Steeltoe.Discovery.Client;
+namespace PricingService;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Cấu hình Web API
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Đăng ký Eureka Discovery Client
-builder.Services.AddDiscoveryClient();
-
-var app = builder.Build();
-
-// Swagger
-if (app.Environment.IsDevelopment())
+public static class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static Task Main(string[] args) => CreateWebHostBuilder(args).Build().RunAsync();
+
+    public static IHostBuilder CreateWebHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+        .ConfigureLogging(logging => logging.AddJsonConsole())
+        .ConfigureWebHostDefaults(web => web.UseStartup<Startup>());
 }
-
-app.UseAuthorization();
-
-// API kiểm tra PricingService
-app.MapGet("/", () => Results.Ok(new
-{
-    Service = "PricingService",
-    Status = "Running",
-    Eureka = "http://localhost:8761"
-}));
-
-app.MapGet("/health", () => Results.Ok(new
-{
-    Status = "Healthy",
-    Service = "PricingService"
-}));
-
-app.MapControllers();
-
-app.Run();
