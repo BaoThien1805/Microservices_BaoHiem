@@ -1,0 +1,12 @@
+{
+  "solution": {
+    "path": "InsuranceMicroservices.sln",
+    "projects": [
+      "ProductService\\ProductService.csproj",
+      "ProductService.Test\\ProductService.Test.csproj",
+      "PaymentService\\PaymentService.csproj",
+      "PaymentService.Test\\PaymentService.Test.csproj",
+      "BlazorWasmClient\\BlazorWasmClient.csproj"
+    ]
+  }
+}
