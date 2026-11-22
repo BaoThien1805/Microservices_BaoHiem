@@ -1,0 +1,20 @@
+name: insurance-th9
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "127.0.0.1:5434:5432"
+    environment:
+      POSTGRES_USER: lab_user
+      POSTGRES_PASSWORD: ${TH9_POSTGRES_PASSWORD:?Set TH9_POSTGRES_PASSWORD}
+      POSTGRES_DB: lab_netmicro_policy
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./th9-createdatabases.sql:/docker-entrypoint-initdb.d/10-services.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U lab_user -d lab_netmicro_policy"]
+      interval: 3s
+      timeout: 4s
+      retries: 20
+volumes:
+  postgres-data:
